@@ -42,6 +42,7 @@ print('\n\nparse data\n')
 
 was_long_command = False
 old_command = ""
+old_code = "";
 
 for command in commands:
     real_command = command[2:4] + command[0:2]
@@ -54,6 +55,7 @@ for command in commands:
         if command_str == -1:
             was_long_command = True
             old_command = bin_command
+            old_code = real_command
             continue
     else:
         was_long_command = False
@@ -62,7 +64,11 @@ for command in commands:
         assembler.append(str(command_str))
     else:
         command_str = "unknown"
-    print(f'command {command} -> {real_command} -> {bin_command} -> {command_str}')
+    print(f'command { old_code + command} -> {old_command + real_command} -> {bin_command} -> {command_str}')
+
+    if not was_long_command:
+        old_code = ""
+        old_command = ""
 
 
 print("\n\ntotal programm:\n")
